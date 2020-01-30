@@ -1,0 +1,67 @@
+{
+  "name": "infra-xyz",
+  "description": "infra-xyz is a tool for bootstraping the infra required to run the piper-pied in all deploys be it production, staging, testing, or development.",
+  "version": "1.0.0",
+  "author": "thepiperpied",
+  "bin": {
+    "xyz": "./bin/run"
+  },
+  "bugs": {
+    "url": "https://github.com/thepiperpied/infra-xyz/issues"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.13.3",
+    "@oclif/plugin-help": "^2.2.3",
+    "commander": "^4.1.0",
+    "inquirer": "^7.0.4",
+    "lowdb": "^1.0.0",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "@types/node": "^10.17.14",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-oclif-typescript": "^0.1.0",
+    "globby": "^10.0.2",
+    "rimraf": "^3.0.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/thepiperpied/infra-xyz#readme",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "GPL-3.0-or-later",
+  "main": "index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "xyz",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thepiperpied/infra-xyz.git"
+  },
+  "scripts": {
+    "postpack": "rimraf oclif.manifest.json",
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md",
+    "ci": "npm run prepack"
+  },
+  "types": "lib/index.d.ts"
+}
