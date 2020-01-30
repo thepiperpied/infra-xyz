@@ -15,11 +15,11 @@ infra-xyz is a tool for bootstraping the infra required to run the piper-pied in
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g infra-xyz
+$ npm install -g @thepiperpied/infra-xyz
 $ xyz COMMAND
 running command...
 $ xyz (-v|--version|version)
-infra-xyz/1.0.0 win32-x64 node-v13.1.0
+@thepiperpied/infra-xyz/1.0.0 win32-x64 node-v13.1.0
 $ xyz --help [COMMAND]
 USAGE
   $ xyz COMMAND
