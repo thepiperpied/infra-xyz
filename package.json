@@ -1,5 +1,5 @@
 {
-  "name": "infra-xyz",
+  "name": "@thepiperpied/infra-xyz",
   "description": "infra-xyz is a tool for bootstraping the infra required to run the piper-pied in all deploys be it production, staging, testing, or development.",
   "version": "1.0.0",
   "author": "thepiperpied",
@@ -50,6 +50,9 @@
     "plugins": [
       "@oclif/plugin-help"
     ]
+  }, 
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",
