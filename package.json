@@ -20,11 +20,17 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
+    "@oclif/test": "^1.2.5",
+    "@types/chai": "^4.2.8",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^10.17.14",
+    "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-oclif": "^3.1.0",
     "eslint-config-oclif-typescript": "^0.1.0",
     "globby": "^10.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1",
     "rimraf": "^3.0.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
@@ -39,9 +45,7 @@
     "/oclif.manifest.json"
   ],
   "homepage": "https://github.com/thepiperpied/infra-xyz#readme",
-  "keywords": [
-    "oclif"
-  ],
+  "keywords": [],
   "license": "GPL-3.0-or-later",
   "main": "index.js",
   "oclif": {
@@ -59,7 +63,7 @@
     "postpack": "rimraf oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "echo NO TESTS",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md",
     "ci": "npm run prepack"
   },
