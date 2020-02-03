@@ -1,0 +1,11 @@
+{
+  "tools": [
+    {
+      "id": 1,
+      "name": "kubectl",
+      "version": "v1.14.8",
+      "status": "Installed",
+      "message": "Kubectl is installed"
+    }
+  ]
+}

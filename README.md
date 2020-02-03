@@ -3,6 +3,7 @@ infra-xyz
 
 infra-xyz is a tool for bootstraping the infra required to run the piper-pied in all deploys be it production, staging, testing, or development.
 
+![Node.js CI](https://github.com/thepiperpied/infra-xyz/workflows/Node.js%20CI/badge.svg)
 ![Node.js Package](https://github.com/thepiperpied/infra-xyz/workflows/Node.js%20Package/badge.svg?event=release)
 [![Version](https://img.shields.io/npm/v/@thepiedpiper/infra-xyz.svg)](https://www.npmjs.com/package/@thepiedpiper/infra-xyz)
 [![Dependencies](https://img.shields.io/david/thepiperpied/infra-xyz)](https://www.npmjs.com/package/@thepiedpiper/infra-xyz)
@@ -12,6 +13,7 @@ infra-xyz is a tool for bootstraping the infra required to run the piper-pied in
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
 <!-- usage -->
 ```sh-session
@@ -19,13 +21,14 @@ $ npm install -g @thepiedpiper/infra-xyz
 $ xyz COMMAND
 running command...
 $ xyz (-v|--version|version)
-@thepiedpiper/infra-xyz/1.0.1 win32-x64 node-v13.1.0
+@thepiedpiper/infra-xyz/1.0.0 win32-x64 node-v13.1.0
 $ xyz --help [COMMAND]
 USAGE
   $ xyz COMMAND
 ...
 ```
 <!-- usagestop -->
+
 # Commands
 <!-- commands -->
 * [`xyz help [COMMAND]`](#xyz-help-command)
@@ -57,11 +60,10 @@ USAGE
   $ xyz init
 
 OPTIONS
-  -h, --help       show CLI help
-  -o, --host=host  (required) Operating system - windows, linux or macos
+  -h, --help  show CLI help
 ```
 
-_See code: [src\commands\init.ts](https://github.com/thepiperpied/infra-xyz/blob/v1.0.1/src\commands\init.ts)_
+_See code: [src\commands\init.ts](https://github.com/thepiperpied/infra-xyz/blob/v1.0.0/src\commands\init.ts)_
 <!-- commandsstop -->
 
 ## 🤝 Contributing
