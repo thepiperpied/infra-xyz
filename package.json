@@ -13,8 +13,9 @@
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
     "@oclif/plugin-help": "^2.2.3",
-    "commander": "^4.1.0",
-    "inquirer": "^7.0.4",
+    "chalk": "^3.0.0",
+    "execa": "^4.0.0",
+    "listr": "^0.14.3",
     "lowdb": "^1.0.0",
     "tslib": "^1.10.0"
   },
@@ -22,6 +23,8 @@
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.5",
     "@types/chai": "^4.2.8",
+    "@types/listr": "^0.14.2",
+    "@types/lowdb": "^1.0.9",
     "@types/mocha": "^5.2.7",
     "@types/node": "^10.17.14",
     "chai": "^4.2.0",
@@ -65,7 +68,8 @@
     "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md",
-    "ci": "npm run prepack"
+    "ci": "npm run prepack",
+    "build": "npm run ci"
   },
   "types": "lib/index.d.ts"
 }
