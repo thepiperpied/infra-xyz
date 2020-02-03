@@ -6,15 +6,15 @@ export default class DBSetup {
 
   static db = lowdb(DBSetup.adapter)
 
-  static post(on: String, data: Object, findBy: Object) {
+  static post(on: string, data: Record<string, any>, findBy: Record<string, any>) {
     if (this.db.get(on).find(findBy).value())
-    this.db.get(on)
-           .find(findBy)
-           .assign(data)
-           .write()
+      this.db.get(on)
+      .find(findBy)
+      .assign(data)
+      .write()
     else
-    this.db.get(on)
-           .push(data)
-           .write()
+      this.db.get(on)
+      .push(data)
+      .write()
   }
 }

@@ -1,5 +1,5 @@
 import KubectlAPI from '../api/kubectl.api'
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs'
 const chalk = require('chalk')
 const Listr = require('listr')
 
@@ -9,25 +9,25 @@ const INIT_TASK = new Listr([{
   title: 'Kubctl',
   task: async (ctx: any, task: any) => {
     return new Observable((observer: any) => {
-      observer.next(`Checking if kubectl installed`)
+      observer.next('Checking if kubectl installed')
       ctx.isKubeExist = kubectlAPI.isKubectlExist()
       if (ctx.isKubeExist) {
         task.title = `${chalk.blue('kubectl')} is already installed`
         observer.complete()
+      } else {
+        observer.complete()
+        task.title = `${chalk.blue('kubectl')} is not installed`
       }
-      
-      observer.complete()
-      task.title = `${chalk.blue('kubectl')} is not installed`
     })
-  }
+  },
 }], {
-  collapse: false
+  collapse: false,
 })
 
 export default class InitTask {
   run() {
     INIT_TASK.run().catch((error: any) => {
-      console.error(error);
+      throw new Error(error)
     })
   }
 }
