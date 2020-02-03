@@ -2,7 +2,7 @@ name: Node.js Package
 
 on:
   release:
-    types: [created]
+    types: [created, updated]
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm publish
+      - run: npm publish --access public --scope @thepiedpieper
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
