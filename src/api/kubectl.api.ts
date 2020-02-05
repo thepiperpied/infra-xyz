@@ -15,7 +15,7 @@ export default class KubectlAPI {
 
       const version = JSON.parse(output.stdout).clientVersion.gitVersion
       return {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: version,
         isExist: true,
@@ -24,7 +24,7 @@ export default class KubectlAPI {
       }
     } catch (error) {
       return  {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: '',
         isExist: false,
@@ -41,7 +41,7 @@ export default class KubectlAPI {
     case 'win32':
       if (!this.CORE.isChocoExist()) {
         return {
-          id: 1,
+          id: this.ID,
           name: this.NAME,
           version: '',
           isExist: false,
@@ -51,7 +51,7 @@ export default class KubectlAPI {
       }
       if (!this.CORE.isHyperVEnabled()) {
         return {
-          id: 1,
+          id: this.ID,
           name: this.NAME,
           version: '',
           isExist: false,
@@ -66,7 +66,7 @@ export default class KubectlAPI {
         version = await JSON.parse(output.stdout).clientVersion.gitVersion
 
         return {
-          id: 1,
+          id: this.ID,
           name: this.NAME,
           version: version,
           isExist: true,
@@ -75,7 +75,7 @@ export default class KubectlAPI {
         }
       } catch (error) {
         return {
-          id: 1,
+          id: this.ID,
           name: this.NAME,
           version: '',
           isExist: false,
@@ -85,7 +85,7 @@ export default class KubectlAPI {
       }
     case 'linux':
       return {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: '',
         isExist: false,
@@ -94,7 +94,7 @@ export default class KubectlAPI {
       }
     case 'freebsd':
       return {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: '',
         isExist: false,
@@ -103,7 +103,7 @@ export default class KubectlAPI {
       }
     case 'openbsd':
       return {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: '',
         isExist: false,
@@ -112,7 +112,7 @@ export default class KubectlAPI {
       }
     case 'sunos':
       return {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: '',
         isExist: false,
@@ -121,7 +121,7 @@ export default class KubectlAPI {
       }
     case 'darwin':
       return {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: '',
         isExist: false,
@@ -130,7 +130,7 @@ export default class KubectlAPI {
       }
     default:
       return {
-        id: 1,
+        id: this.ID,
         name: this.NAME,
         version: '',
         isExist: false,
