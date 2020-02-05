@@ -1,1 +1,0 @@
-{"version":"1.0.0","commands":{"init":{"id":"init","description":"init - command prepares the host system by installing all dependencies.","pluginName":"@thepiedpiper/infra-xyz","pluginType":"core","aliases":[],"flags":{"help":{"name":"help","type":"boolean","char":"h","description":"show CLI help","allowNo":false}},"args":[]}}}
