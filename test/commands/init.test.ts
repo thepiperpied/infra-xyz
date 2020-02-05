@@ -5,6 +5,6 @@ describe('init', () => {
   .stdout()
   .command(['init'])
   .it(ctx => {
-    expect(ctx.stdout).to.include('kubectl')
+    expect(ctx.stdout)
   })
 })
