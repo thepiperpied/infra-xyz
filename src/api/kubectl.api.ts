@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+const {blue} = require('kleur')
 import CoreAPI from './core.api'
 const execa = require('execa')
 
@@ -20,7 +20,7 @@ export default class KubectlAPI {
         version: version,
         isExist: true,
         isFailed: false,
-        message: `${chalk.blue('kubectl')} is already installed on this machine`,
+        message: `${blue('kubectl')} is already installed on this machine`,
       }
     } catch (error) {
       return  {
@@ -29,7 +29,7 @@ export default class KubectlAPI {
         version: '',
         isExist: false,
         isFailed: true,
-        message: `${chalk.blue('kubectl')} is not installed`,
+        message: `${blue('kubectl')} is not installed`,
       }
     }
   }
@@ -71,7 +71,7 @@ export default class KubectlAPI {
           version: version,
           isExist: true,
           isFailed: false,
-          message: `${chalk.blue('kubectl')} is installed on this machine`,
+          message: `${blue('kubectl')} is installed on this machine`,
         }
       } catch (error) {
         return {
@@ -80,7 +80,7 @@ export default class KubectlAPI {
           version: '',
           isExist: false,
           isFailed: true,
-          message: `${chalk.blue('kubectl')} installation failed`,
+          message: `${blue('kubectl')} installation failed`,
         }
       }
     case 'linux':
@@ -90,7 +90,7 @@ export default class KubectlAPI {
         version: '',
         isExist: false,
         isFailed: true,
-        message: `${chalk.blue('kubectl')} installation failed`,
+        message: `${blue('kubectl')} installation failed`,
       }
     case 'freebsd':
       return {
@@ -99,7 +99,7 @@ export default class KubectlAPI {
         version: '',
         isExist: false,
         isFailed: true,
-        message: `${chalk.blue('kubectl')} installation failed`,
+        message: `${blue('kubectl')} installation failed`,
       }
     case 'openbsd':
       return {
@@ -108,7 +108,7 @@ export default class KubectlAPI {
         version: '',
         isExist: false,
         isFailed: true,
-        message: `${chalk.blue('kubectl')} installation failed`,
+        message: `${blue('kubectl')} installation failed`,
       }
     case 'sunos':
       return {
@@ -117,7 +117,7 @@ export default class KubectlAPI {
         version: '',
         isExist: false,
         isFailed: true,
-        message: `${chalk.blue('kubectl')} installation failed`,
+        message: `${blue('kubectl')} installation failed`,
       }
     case 'darwin':
       return {
@@ -126,7 +126,7 @@ export default class KubectlAPI {
         version: '',
         isExist: false,
         isFailed: true,
-        message: `${chalk.blue('kubectl')} installation failed`,
+        message: `${blue('kubectl')} installation failed`,
       }
     default:
       return {
@@ -135,7 +135,7 @@ export default class KubectlAPI {
         version: '',
         isExist: false,
         isFailed: true,
-        message: `${chalk.blue('host system')} not identified`,
+        message: `${blue('host system')} not identified`,
       }
     }
   }
@@ -144,7 +144,7 @@ export default class KubectlAPI {
     return {
       text: 'Kubectl',
       task: async (ctx: any) => {
-        ctx.text(`Checking if ${chalk.blue('kubectl')} is installed...`)
+        ctx.text(`Checking if ${blue('kubectl')} is installed...`)
         await new Promise(resolve => setTimeout(resolve, 2000))
         const isKubectlExist = await this.isKubectlExist()
         if (isKubectlExist.isFailed) {
