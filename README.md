@@ -4,8 +4,8 @@ infra-xyz
 infra-xyz is a tool for bootstraping the infra required to run the piper-pied in all deploys be it production, staging, testing, or development.
 
 ![Node.js CI](https://github.com/thepiperpied/infra-xyz/workflows/Node.js%20CI/badge.svg)
-![Node.js Package](https://github.com/thepiperpied/infra-xyz/workflows/Node.js%20Package/badge.svg?event=release)
 [![Version](https://img.shields.io/npm/v/@thepiedpiper/infra-xyz.svg)](https://www.npmjs.com/package/@thepiedpiper/infra-xyz)
+[![Dependencies](https://img.shields.io/npm/dt/@thepiedpiper/infra-xyz)](https://www.npmjs.com/package/@thepiedpiper/infra-xyz)
 [![Dependencies](https://img.shields.io/david/thepiperpied/infra-xyz)](https://www.npmjs.com/package/@thepiedpiper/infra-xyz)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/thepiperpied/infra-xyz/blob/master/LICENSE)
 

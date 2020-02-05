@@ -1,6 +1,5 @@
-import DBSetup from '../wrapper/db.wrapper'
+const chalk = require('chalk')
 import CoreAPI from './core.api'
-
 const execa = require('execa')
 
 export default class KubectlAPI {
@@ -10,51 +9,156 @@ export default class KubectlAPI {
 
   CORE = new CoreAPI()
 
-  isKubectlExist(): boolean {
+  isKubectlExist(): any {
     try {
       const output = execa.commandSync('kubectl version --client --output=json')
+
       const version = JSON.parse(output.stdout).clientVersion.gitVersion
-      DBSetup.post('tools', {
+      return {
         id: 1,
         name: this.NAME,
         version: version,
-        status: 'Installed',
-        message: 'Kubectl is installed',
-      }, {
-        id: this.ID,
-      })
-      return true
+        isExist: true,
+        isFailed: false,
+        message: `${chalk.blue('kubectl')} is already installed on this machine`,
+      }
     } catch (error) {
-      DBSetup.post('tools', {
+      return  {
         id: 1,
         name: this.NAME,
-        version: '--',
-        status: 'Not Installed',
-        message: 'Kubectl is not installed',
-      }, {
-        id: this.ID,
-      })
+        version: '',
+        isExist: false,
+        isFailed: true,
+        message: `${chalk.blue('kubectl')} is not installed`,
+      }
     }
-
-    return false
   }
 
-  installKubectl() {
+  async installKubectl() {
+    let output
+    let version
     switch (this.CORE.getPlatform()) {
     case 'win32':
-      break
+      if (!this.CORE.isChocoExist()) {
+        return {
+          id: 1,
+          name: this.NAME,
+          version: '',
+          isExist: false,
+          isFailed: true,
+          message: 'Please install chocolaty package manager for windows first. (https://chocolatey.org/packages/chocolatey)',
+        }
+      }
+      if (!this.CORE.isHyperVEnabled()) {
+        return {
+          id: 1,
+          name: this.NAME,
+          version: '',
+          isExist: false,
+          isFailed: true,
+          message: 'Please enable Hyper-V for windows first.',
+        }
+      }
+      try {
+        output = await execa.commandSync('choco install kubernetes-cli')
+        output = await this.isKubectlExist()
+
+        version = await JSON.parse(output.stdout).clientVersion.gitVersion
+
+        return {
+          id: 1,
+          name: this.NAME,
+          version: version,
+          isExist: true,
+          isFailed: false,
+          message: `${chalk.blue('kubectl')} is installed on this machine`,
+        }
+      } catch (error) {
+        return {
+          id: 1,
+          name: this.NAME,
+          version: '',
+          isExist: false,
+          isFailed: true,
+          message: `${chalk.blue('kubectl')} installation failed`,
+        }
+      }
     case 'linux':
-      break
+      return {
+        id: 1,
+        name: this.NAME,
+        version: '',
+        isExist: false,
+        isFailed: true,
+        message: `${chalk.blue('kubectl')} installation failed`,
+      }
     case 'freebsd':
-      break
+      return {
+        id: 1,
+        name: this.NAME,
+        version: '',
+        isExist: false,
+        isFailed: true,
+        message: `${chalk.blue('kubectl')} installation failed`,
+      }
     case 'openbsd':
-      break
+      return {
+        id: 1,
+        name: this.NAME,
+        version: '',
+        isExist: false,
+        isFailed: true,
+        message: `${chalk.blue('kubectl')} installation failed`,
+      }
     case 'sunos':
-      break
+      return {
+        id: 1,
+        name: this.NAME,
+        version: '',
+        isExist: false,
+        isFailed: true,
+        message: `${chalk.blue('kubectl')} installation failed`,
+      }
     case 'darwin':
-      break
+      return {
+        id: 1,
+        name: this.NAME,
+        version: '',
+        isExist: false,
+        isFailed: true,
+        message: `${chalk.blue('kubectl')} installation failed`,
+      }
     default:
-      throw new Error('Could not detect running host system')
+      return {
+        id: 1,
+        name: this.NAME,
+        version: '',
+        isExist: false,
+        isFailed: true,
+        message: `${chalk.blue('host system')} not identified`,
+      }
+    }
+  }
+
+  kubectlTask() {
+    return {
+      text: 'Kubectl',
+      task: async (ctx: any) => {
+        ctx.text(`Checking if ${chalk.blue('kubectl')} is installed...`)
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        const isKubectlExist = await this.isKubectlExist()
+        if (isKubectlExist.isFailed) {
+          ctx.text(isKubectlExist.message)
+          const kubectlInstall = await this.installKubectl()
+          if (kubectlInstall.isFailed)
+            throw new Error(kubectlInstall.message)
+
+          ctx.text(kubectlInstall.message)
+        } else {
+          ctx.isKubectlExist = true
+          ctx.text(isKubectlExist.message)
+        }
+      },
     }
   }
 }
