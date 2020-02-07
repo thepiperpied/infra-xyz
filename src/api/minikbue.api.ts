@@ -2,21 +2,22 @@ const {blue} = require('kleur')
 import CoreAPI from './core.api'
 const execa = require('execa')
 
-export default class KubectlAPI {
+export default class MinikubeAPI {
   ID = 1
 
   NAME = 'kubectl'
 
   CORE = new CoreAPI()
 
-  isKubectlExist(): any {
+  isMinikubeExist(): any {
     let isFailed = true
     let isExist = false
     try {
-      const output = execa.commandSync('kubectl version --client --output=json')
-      JSON.parse(output.stdout).clientVersion.gitVersion
-      isFailed = false
-      isExist = true
+      const output = execa.commandSync('minikube version')
+      if (output.stdout.includes('version')) {
+        isFailed = false
+        isExist = true
+      }
     } catch (error) {
     }
 
@@ -27,26 +28,26 @@ export default class KubectlAPI {
         version: '',
         isExist: isExist,
         isFailed: isFailed,
-        message: `${blue('kubectl')} is not installed`,
+        message: `${blue('minikube')} is not installed`,
       }
     return {
       id: this.ID,
       name: this.NAME,
       isExist: isExist,
       isFailed: isFailed,
-      message: `${blue('kubectl')} is already installed on this machine`,
+      message: `${blue('minikube')} is already installed on this machine`,
     }
   }
 
-  async installKubectl() {
+  async installMinikube() {
     let output
     let isExist = false
     let isFailed = true
     switch (this.CORE.getPlatform()) {
     case 'win32':
       try {
-        await execa.commandSync('choco install kubernetes-cli')
-        output = await this.isKubectlExist()
+        await execa.commandSync('choco install minikube')
+        output = await this.isMinikubeExist()
         isExist = output.isExist
         isFailed = output.isFailed
 
@@ -79,7 +80,7 @@ export default class KubectlAPI {
         version: '',
         isExist: isExist,
         isFailed: isFailed,
-        message: `${blue('kubectl')} installation failed.`,
+        message: `${blue('minikube')} installation failed.`,
       }
     return {
       id: this.ID,
@@ -87,26 +88,26 @@ export default class KubectlAPI {
       version: '',
       isExist: isExist,
       isFailed: isFailed,
-      message: `${blue('kubectl')} installation successed.`,
+      message: `${blue('minikube')} installation successed.`,
     }
   }
 
-  kubectlTask() {
+  minikubeTask() {
     return {
       text: 'Kubectl',
       task: async (ctx: any) => {
-        ctx.text(`Checking if ${blue('kubectl')} is installed...`)
+        ctx.text(`Checking if ${blue('minikube')} is installed...`)
         await new Promise(resolve => setTimeout(resolve, 2000))
-        const isKubectlExist = await this.isKubectlExist()
+        const isKubectlExist = await this.isMinikubeExist()
         if (isKubectlExist.isFailed) {
           ctx.text(isKubectlExist.message)
-          const kubectlInstall = await this.installKubectl()
-          if (kubectlInstall.isFailed)
-            throw new Error(kubectlInstall.message)
+          const minikubeInstall = await this.installMinikube()
+          if (minikubeInstall.isFailed)
+            throw new Error(minikubeInstall.message)
 
-          ctx.text(kubectlInstall.message)
+          ctx.text(minikubeInstall.message)
         } else {
-          ctx.isKubectlExist = true
+          ctx.isMinikubeExist = true
           ctx.text(isKubectlExist.message)
         }
       },
