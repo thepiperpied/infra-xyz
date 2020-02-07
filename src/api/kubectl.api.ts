@@ -39,26 +39,6 @@ export default class KubectlAPI {
     let version
     switch (this.CORE.getPlatform()) {
     case 'win32':
-      if (!this.CORE.isChocoExist()) {
-        return {
-          id: this.ID,
-          name: this.NAME,
-          version: '',
-          isExist: false,
-          isFailed: true,
-          message: 'Please install chocolaty package manager for windows first. (https://chocolatey.org/packages/chocolatey)',
-        }
-      }
-      if (!this.CORE.isHyperVEnabled()) {
-        return {
-          id: this.ID,
-          name: this.NAME,
-          version: '',
-          isExist: false,
-          isFailed: true,
-          message: 'Please enable Hyper-V for windows first.',
-        }
-      }
       try {
         output = await execa.commandSync('choco install kubernetes-cli')
         output = await this.isKubectlExist()
