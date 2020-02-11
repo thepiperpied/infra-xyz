@@ -49,8 +49,6 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src\commands\help.ts)_
-
 ## `xyz init`
 
 init - command prepares the host system by installing all dependencies.
@@ -63,7 +61,6 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\init.ts](https://github.com/thepiperpied/infra-xyz/blob/v1.0.0/src\commands\init.ts)_
 <!-- commandsstop -->
 
 ## 🤝 Contributing
