@@ -1,7 +1,7 @@
 {
   "name": "@thepiedpiper/infra-xyz",
   "description": "infra-xyz is a tool for bootstraping the infra required to run the piper-pied in all deploys be it production, staging, testing, or development.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "thepiperpied",
   "bin": {
     "xyz": "./bin/run"
